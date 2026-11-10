@@ -103,3 +103,21 @@
 .career-logo--goonziptec{background:#000}
 @media(max-width:900px){.timeline article{grid-template-columns:72px minmax(0,1fr);column-gap:16px;row-gap:10px}.timeline article>span{grid-column:1/-1}.timeline-marker{display:none}.timeline article>.career-logo{grid-column:1;grid-row:2}.timeline article>.career-detail{grid-column:2;grid-row:2}}
 @media(max-width:600px){.timeline article{grid-template-columns:58px minmax(0,1fr);column-gap:12px;row-gap:9px}.career-logo{width:58px;height:58px;border-radius:6px}.career-heading h3{font-size:20px}}
+
+
+/* CAREER logos: show the supplied image directly below each date */
+.timeline article{grid-template-columns:180px 10px minmax(0,1fr);column-gap:28px;align-items:start}
+.career-date{display:flex;flex-direction:column;align-items:flex-start;gap:14px;min-width:0}
+.career-date>span{font-size:9px;color:#777}
+.career-logo{width:76px;height:auto;margin:0;border:0;border-radius:0;overflow:visible;display:block;background:transparent}
+.career-logo img{display:block;width:100%;height:auto;object-fit:contain}
+@media(max-width:900px){
+ .timeline article{grid-template-columns:minmax(0,1fr);gap:12px}
+ .timeline-marker{display:none}
+ .career-date{grid-column:1;grid-row:auto}
+ .career-detail{grid-column:1;grid-row:auto}
+}
+@media(max-width:600px){
+ .career-date{gap:12px}
+ .career-logo{width:68px}
+}
