@@ -93,3 +93,13 @@
 
 /* MOBILE HEADER: match the actual header/nav elements */
 @media(max-width:600px){header{padding:0 18px}header nav{display:none}}
+
+
+/* CAREER company logos */
+.timeline article{grid-template-columns:180px 10px 78px minmax(0,1fr);column-gap:24px;align-items:start}
+.career-logo{width:78px;height:78px;margin-top:2px;border:1px solid #303030;border-radius:8px;overflow:hidden;display:grid;place-items:center;flex-shrink:0}
+.career-logo img{display:block;width:100%;height:100%;object-fit:contain}
+.career-logo--hidoc,.career-logo--car123tech{background:#fff}
+.career-logo--goonziptec{background:#000}
+@media(max-width:900px){.timeline article{grid-template-columns:72px minmax(0,1fr);column-gap:16px;row-gap:10px}.timeline article>span{grid-column:1/-1}.timeline-marker{display:none}.timeline article>.career-logo{grid-column:1;grid-row:2}.timeline article>.career-detail{grid-column:2;grid-row:2}}
+@media(max-width:600px){.timeline article{grid-template-columns:58px minmax(0,1fr);column-gap:12px;row-gap:9px}.career-logo{width:58px;height:58px;border-radius:6px}.career-heading h3{font-size:20px}}
