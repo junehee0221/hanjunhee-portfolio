@@ -89,3 +89,7 @@
 .about h2 span{white-space:nowrap}
 @media(max-width:900px){.about h2{font-size:clamp(26px,5.2vw,42px)}}
 @media(max-width:600px){.about h2{font-size:clamp(24px,6.4vw,34px)}}
+
+
+/* MOBILE HEADER: match the actual header/nav elements */
+@media(max-width:600px){header{padding:0 18px}header nav{display:none}}
