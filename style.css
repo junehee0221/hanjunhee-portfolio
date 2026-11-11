@@ -125,3 +125,14 @@
 /* Reduce the unused left column consistently for all CAREER entries */
 .timeline article{grid-template-columns:155px 10px minmax(0,1fr);column-gap:24px}
 @media(max-width:900px){.timeline article{grid-template-columns:minmax(0,1fr);column-gap:0}}
+
+
+/* CONTACT section */
+.contact-intro{margin:-12px 0 24px;color:#999;font-size:12px;line-height:1.8}
+.contact-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.contact-link{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px;padding:24px;border:1px solid #292929;background:linear-gradient(145deg,#121212,#0b0b0b);min-width:0;transition:border-color .25s,background .25s}
+.contact-link:hover{border-color:#666;background:#141414}
+.contact-link span{grid-column:1/-1;color:#777;font-size:8px;letter-spacing:.17em}
+.contact-link strong{min-width:0;color:#eee;font-size:clamp(15px,2vw,21px);font-weight:700;overflow-wrap:anywhere}
+.contact-link i{color:var(--red);font-style:normal;font-size:16px}
+@media(max-width:600px){.contact-links{grid-template-columns:1fr}.contact-link{padding:20px}.contact-link strong{font-size:17px}}
