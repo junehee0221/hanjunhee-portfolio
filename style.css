@@ -122,6 +122,6 @@
  .career-logo{width:68px}
 }
 
-/* Reduce the unused left column only for the Goonziptec career entry */
-.timeline article:last-child{grid-template-columns:155px 10px minmax(0,1fr);column-gap:24px}
-@media(max-width:900px){.timeline article:last-child{grid-template-columns:minmax(0,1fr);column-gap:0}}
+/* Reduce the unused left column consistently for all CAREER entries */
+.timeline article{grid-template-columns:155px 10px minmax(0,1fr);column-gap:24px}
+@media(max-width:900px){.timeline article{grid-template-columns:minmax(0,1fr);column-gap:0}}
