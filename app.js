@@ -19,3 +19,29 @@ companies.forEach(c=>{c.items=c.items.filter(it=>{const id=getYoutubeId(it[2]);i
 const root=document.querySelector('#companies');
 companies.forEach((c,ci)=>{const isShorts=c.name==='SHORTS';const sec=document.createElement('div');sec.className='company'+(isShorts?' shorts-company':'');sec.innerHTML=`<div class="company-top"><div><em>${String(ci+1).padStart(2,'0')} / ${c.label}</em><h3>${c.name}</h3><div class="company-desc">${c.desc}</div></div><div class="arrows"><button aria-label="이전 영상">←</button><button aria-label="다음 영상">→</button></div></div><div class="rail"></div>`;root.appendChild(sec);const rail=sec.querySelector('.rail');c.items.forEach((it,ii)=>{const id=getYoutubeId(it[2]);const card=document.createElement('article');card.className='card'+(id?' ready':' placeholder')+(isShorts?' short-card':'');if(id){card.dataset.videoId=id;card.dataset.placeholderTitle=it[0]||''}card.innerHTML=`<div class="thumb tone-${c.tone}">${id?'<img loading="lazy" src="https://i.ytimg.com/vi/'+id+'/hqdefault.jpg" alt="'+escapeHtml(it[0]||'YouTube video')+'" /><span class="play">▶</span>':''}</div><div class="info"><div class="meta"><span>${escapeHtml(isShorts?(it[0]||'SHORTS').split(' ')[0]:c.label.split(' · ')[0])}</span><span>${String(ii+1).padStart(2,'0')}</span></div><div class="title">${escapeHtml(it[0]||it[1])}</div><div class="role">${escapeHtml(it[0]?it[1]:'영상 링크와 썸네일을 추가하면 이 카드가 활성화됩니다.')}</div></div>`;rail.appendChild(card);if(id){const img=card.querySelector('.thumb img');if(img)img.addEventListener('error',()=>{const step=img.dataset.fallback||'0';if(step==='0'){img.dataset.fallback='1';img.src='https://i.ytimg.com/vi/'+id+'/sddefault.jpg'}else if(step==='1'){img.dataset.fallback='2';img.src='https://img.youtube.com/vi/'+id+'/0.jpg'}});card.addEventListener('click',()=>{const liveTitle=card.querySelector('.title')?.textContent||it[0]||'YouTube video';openVideo(id,liveTitle,it[1],isShorts)})}});const btns=sec.querySelectorAll('.arrows button');btns[0].onclick=()=>rail.scrollBy({left:-rail.clientWidth*.84,behavior:'smooth'});btns[1].onclick=()=>rail.scrollBy({left:rail.clientWidth*.84,behavior:'smooth'});});
 const modal=document.querySelector('#modal'),player=document.querySelector('#player'),modalBox=document.querySelector('.modal-box');function openVideo(id,title,role,isShort){if(!id)return;modalBox.classList.toggle('short-video',!!isShort);player.innerHTML=`<iframe src="https://www.youtube.com/embed/${id}?autoplay=1&rel=0" title="${escapeHtml(title)}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;document.querySelector('#m-title').textContent=title;document.querySelector('#m-role').textContent=role;modal.classList.add('show');document.body.style.overflow='hidden'}function closeModal(){modal.classList.remove('show');modalBox.classList.remove('short-video');player.innerHTML='';document.body.style.overflow=''}document.querySelectorAll('[data-close]').forEach(el=>el.addEventListener('click',closeModal));document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+
+
+// Featured projects shown above the company-by-company work rails.
+const selectedProjects=[
+  {id:'X7_JhaVq3TU',category:'MEDICAL',title:'살을 빼는 간헐적 단식, 안 먹는 게 아니라 잘 먹어야 합니다',role:'메인 촬영 · 메인 편집'},
+  {id:'CSBLaXRrd7U',category:'BRANDED CONTENT',title:'힐리언스 선마을 내부 시청 영상',role:'메인 촬영 · 메인 편집'},
+  {id:'GPAFu57FTog',category:'MAGAZINE',title:'죽음으로 삶을 그리는 화가 | 한국 현대미술 거장 안창홍 작가',role:'메인 촬영 · 메인 편집'},
+  {id:'22GGFnOV1M8',category:'AUTOMOTIVE',title:'명장님의 박살난 BMW 저희가 고쳐드렸습니다 | part 1',role:'메인 촬영 · 메인 편집'}
+];
+const selectedRoot=document.querySelector('#selected-work-grid');
+if(selectedRoot){
+  selectedProjects.forEach((project,index)=>{
+    const card=document.createElement('article');
+    card.className='card ready selected-card';
+    card.dataset.videoId=project.id;
+    card.innerHTML=`<div class="thumb"><img loading="lazy" src="https://i.ytimg.com/vi/${project.id}/hqdefault.jpg" alt="${escapeHtml(project.title)}"><span class="play">▶</span></div><div class="info"><div class="meta"><span>${escapeHtml(project.category)}</span><span>0${index+1}</span></div><div class="title">${escapeHtml(project.title)}</div><div class="role">${escapeHtml(project.role)}</div></div>`;
+    const img=card.querySelector('.thumb img');
+    img.addEventListener('error',()=>{
+      const step=img.dataset.fallback||'0';
+      if(step==='0'){img.dataset.fallback='1';img.src='https://i.ytimg.com/vi/'+project.id+'/sddefault.jpg'}
+      else if(step==='1'){img.dataset.fallback='2';img.src='https://img.youtube.com/vi/'+project.id+'/0.jpg'}
+    });
+    card.addEventListener('click',()=>openVideo(project.id,project.title,project.role,false));
+    selectedRoot.appendChild(card);
+  });
+}
