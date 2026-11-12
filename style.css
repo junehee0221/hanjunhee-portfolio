@@ -260,3 +260,7 @@
   .legal-block p,.legal-block li{font-size:11px}
   .legal-footer{padding:18px;flex-wrap:wrap}
 }
+
+
+/* Car123Tech has three entries: keep all three cards fully visible on desktop. */
+@media(min-width:901px){.car123-company .rail{grid-auto-columns:minmax(250px,calc((100% - 28px)/3))}}
