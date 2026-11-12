@@ -21,32 +21,22 @@ companies.forEach((c,ci)=>{const isShorts=c.name==='SHORTS';const sec=document.c
 const modal=document.querySelector('#modal'),player=document.querySelector('#player'),modalBox=document.querySelector('.modal-box');function openVideo(id,title,role,isShort){if(!id)return;modalBox.classList.toggle('short-video',!!isShort);player.innerHTML=`<iframe src="https://www.youtube.com/embed/${id}?autoplay=1&rel=0" title="${escapeHtml(title)}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;document.querySelector('#m-title').textContent=title;document.querySelector('#m-role').textContent=role;modal.classList.add('show');document.body.style.overflow='hidden'}function closeModal(){modal.classList.remove('show');modalBox.classList.remove('short-video');player.innerHTML='';document.body.style.overflow=''}document.querySelectorAll('[data-close]').forEach(el=>el.addEventListener('click',closeModal));document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 
 
-// Featured projects shown above the company-by-company work rails.
-const selectedProjects=[
-  {id:'X7_JhaVq3TU',category:'MEDICAL',title:'살을 빼는 간헐적 단식, 안 먹는 게 아니라 잘 먹어야 합니다',role:'메인 촬영 · 메인 편집'},
-  {id:'CSBLaXRrd7U',category:'BRANDED CONTENT',title:'힐리언스 선마을 내부 시청 영상',role:'메인 촬영 · 메인 편집'},
-  {id:'GPAFu57FTog',category:'MAGAZINE',title:'죽음으로 삶을 그리는 화가 | 한국 현대미술 거장 안창홍 작가',role:'메인 촬영 · 메인 편집'},
-  {id:'22GGFnOV1M8',category:'AUTOMOTIVE',title:'명장님의 박살난 BMW 저희가 고쳐드렸습니다 | part 1',role:'메인 촬영 · 메인 편집'}
-];
-const selectedRoot=document.querySelector('#selected-work-grid');
-if(selectedRoot){
-  selectedProjects.forEach((project,index)=>{
-    const card=document.createElement('article');
-    card.className='card ready selected-card';
-    card.dataset.videoId=project.id;
-    card.setAttribute('role','button');
-    card.setAttribute('aria-label',project.title+' 영상 재생');
-    card.tabIndex=0;
-    card.innerHTML=`<div class="thumb"><img loading="lazy" src="https://i.ytimg.com/vi/${project.id}/hqdefault.jpg" alt="${escapeHtml(project.title)}"><span class="play">▶</span></div><div class="info"><div class="meta"><span>${escapeHtml(project.category)}</span><span>0${index+1}</span></div><div class="title">${escapeHtml(project.title)}</div><div class="role">${escapeHtml(project.role)}</div></div>`;
-    const img=card.querySelector('.thumb img');
+// Bind the statically rendered featured project cards to the existing video modal.
+document.querySelectorAll('.selected-card').forEach(card=>{
+  const id=card.dataset.videoId;
+  const title=card.dataset.videoTitle||card.querySelector('.title')?.textContent||'YouTube video';
+  const role=card.dataset.videoRole||'';
+  const img=card.querySelector('.thumb img');
+  if(img){
     img.addEventListener('error',()=>{
       const step=img.dataset.fallback||'0';
-      if(step==='0'){img.dataset.fallback='1';img.src='https://i.ytimg.com/vi/'+project.id+'/sddefault.jpg'}
-      else if(step==='1'){img.dataset.fallback='2';img.src='https://img.youtube.com/vi/'+project.id+'/0.jpg'}
+      if(step==='0'){img.dataset.fallback='1';img.src='https://i.ytimg.com/vi/'+id+'/sddefault.jpg'}
+      else if(step==='1'){img.dataset.fallback='2';img.src='https://img.youtube.com/vi/'+id+'/0.jpg'}
     });
-    const playSelected=()=>openVideo(project.id,project.title,project.role,false);
-    card.addEventListener('click',playSelected);
-    card.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();playSelected()}});
-    selectedRoot.appendChild(card);
+  }
+  const play=()=>openVideo(id,title,role,false);
+  card.addEventListener('click',play);
+  card.addEventListener('keydown',event=>{
+    if(event.key==='Enter'||event.key===' '){event.preventDefault();play()}
   });
-}
+});
