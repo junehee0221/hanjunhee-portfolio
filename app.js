@@ -34,6 +34,9 @@ if(selectedRoot){
     const card=document.createElement('article');
     card.className='card ready selected-card';
     card.dataset.videoId=project.id;
+    card.setAttribute('role','button');
+    card.setAttribute('aria-label',project.title+' 영상 재생');
+    card.tabIndex=0;
     card.innerHTML=`<div class="thumb"><img loading="lazy" src="https://i.ytimg.com/vi/${project.id}/hqdefault.jpg" alt="${escapeHtml(project.title)}"><span class="play">▶</span></div><div class="info"><div class="meta"><span>${escapeHtml(project.category)}</span><span>0${index+1}</span></div><div class="title">${escapeHtml(project.title)}</div><div class="role">${escapeHtml(project.role)}</div></div>`;
     const img=card.querySelector('.thumb img');
     img.addEventListener('error',()=>{
@@ -41,7 +44,9 @@ if(selectedRoot){
       if(step==='0'){img.dataset.fallback='1';img.src='https://i.ytimg.com/vi/'+project.id+'/sddefault.jpg'}
       else if(step==='1'){img.dataset.fallback='2';img.src='https://img.youtube.com/vi/'+project.id+'/0.jpg'}
     });
-    card.addEventListener('click',()=>openVideo(project.id,project.title,project.role,false));
+    const playSelected=()=>openVideo(project.id,project.title,project.role,false);
+    card.addEventListener('click',playSelected);
+    card.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();playSelected()}});
     selectedRoot.appendChild(card);
   });
 }
