@@ -177,3 +177,16 @@
 }
 .skill-tools{display:block;margin-top:17px;padding-top:11px;border-top:1px solid #292929;color:#aaa;font-size:10px;line-height:1.6}
 .skill-tools strong{display:block;margin-bottom:5px;color:#666;font-size:7px;letter-spacing:.16em}
+
+
+/* HERO contents index: five entries including the new Selected Work section */
+.hero-index-list{grid-template-columns:repeat(5,minmax(0,1fr))}
+.hero-index-item strong{font-size:clamp(10px,.95vw,13px);letter-spacing:.07em}
+@media(max-width:900px){
+  .hero-index-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hero-index-item:nth-child(5){border-left:1px solid #292929;border-top:1px solid #292929}
+}
+@media(max-width:600px){
+  .hero-index-item strong{font-size:10px;letter-spacing:.06em}
+}
+#selected-work{scroll-margin-top:86px}
