@@ -264,3 +264,28 @@
 
 /* Car123Tech has three entries: keep all three cards fully visible on desktop. */
 @media(min-width:901px){.car123-company .rail{grid-auto-columns:minmax(250px,calc((100% - 28px)/3))}}
+
+/* Portfolio refinement: readable career hierarchy and keyboard accessibility */
+.about-strengths{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:18px}
+.about-strengths>div{padding:13px 14px;border:1px solid #292929;background:#101010;min-width:0}
+.about-strengths strong{display:block;color:#e6e6e6;font-size:10px;letter-spacing:.06em;margin-bottom:7px}
+.about-strengths span{display:block;color:#aaa;font-size:11px;line-height:1.6}
+.career-section-title--sub{margin-top:21px}
+.career-brand-grid--primary>div{background:#151515;border-color:#393939}
+.card.ready[role="button"]{cursor:pointer}
+.card.ready:focus-visible,.arrows button:focus-visible,.modal-box button:focus-visible,header a:focus-visible,.contact-link:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+.modal-box{max-height:calc(100dvh - 24px);overflow-y:auto}
+.modal-box>button{cursor:pointer}
+header small,.meta,.skills b,.skill-tools strong{color:#999}
+.section-head>p,.company-desc,.career-section-title,.timeline small{color:#aaa}
+@media(max-width:600px){
+ .selected-work-grid{grid-template-columns:1fr;gap:13px}
+ .selected-work-grid .info{padding:14px}
+ .selected-work-grid .title{font-size:14px;min-height:0}
+ .selected-work-grid .role{font-size:10px}
+ .selected-work-grid .meta{font-size:9px}
+ .about-strengths{grid-template-columns:1fr;gap:8px}
+ .about-strengths>div{padding:11px 13px}
+ .modal-box h3{font-size:15px;overflow-wrap:anywhere}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
