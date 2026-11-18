@@ -302,8 +302,8 @@ header small,.meta,.skills b,.skill-tools strong{color:#999}
 .company[hidden]{display:none!important}
 .featured-explain{margin-top:13px;padding-top:11px;border-top:1px solid #303030;display:grid;gap:8px}
 .featured-explain p{margin:0;display:grid;gap:4px;line-height:1.55}
-.featured-explain strong{color:#aaa;font-size:11px;font-weight:700}
-.featured-explain span{color:#d2d2d2;font-size:12px}
+.featured-explain strong{color:#aaa;font-size:10px;font-weight:700}
+.featured-explain span{color:#d2d2d2;font-size:11px}
 .selected-work-grid .role{font-size:11px}
 .selected-work-grid .meta{font-size:10px;color:#aaa}
 .career-featured-links a .career-video-title{color:#ddd;min-width:0;overflow-wrap:anywhere}
@@ -333,7 +333,7 @@ header small,.meta,.skills b,.skill-tools strong{color:#999}
  .work-filter{font-size:11px;padding:10px 12px}
  .selected-work-grid .role{font-size:11px}
  .selected-work-grid .meta{font-size:10px}
- .featured-explain span{font-size:12px}
+ .featured-explain span{font-size:11px}
  .footer-legal a,.cert span{font-size:11px}
  .career-featured-links a,.career-brand-grid p{font-size:12px}
  .career-role-tags span{font-size:11px}
