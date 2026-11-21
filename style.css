@@ -157,19 +157,19 @@
 .selected-work-head>div{display:flex;align-items:baseline;gap:14px;min-width:0}
 .selected-work-head h3{margin:0;color:#eee;font-size:clamp(23px,3vw,34px);letter-spacing:-.045em}
 .selected-work-head>p{margin:0;color:#777;font-size:10px}
-.selected-work-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.featured-arrows{justify-content:flex-end;margin-bottom:12px}
 .selected-work-grid .card{min-width:0;cursor:pointer}
 .selected-work-grid .thumb{aspect-ratio:16/9}
 .selected-work-grid .title{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;min-height:2.9em;font-size:13px}
 .selected-work-grid .card:focus-visible{outline:1px solid var(--red);outline-offset:3px}
-@media(max-width:900px){.selected-work-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
 @media(max-width:600px){
   .selected-work{margin-bottom:52px;padding-top:20px}
   .selected-work-head{align-items:start}
   .selected-work-head>div{display:block}
   .selected-work-head h3{margin-top:7px;font-size:25px}
   .selected-work-head>p{font-size:9px;text-align:right;padding-top:4px}
-  .selected-work-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  
   .selected-work-grid .info{padding:11px}
   .selected-work-grid .title{font-size:11px;min-height:3em}
   .selected-work-grid .role{font-size:8px}
@@ -279,7 +279,7 @@
 header small,.meta,.skills b,.skill-tools strong{color:#999}
 .section-head>p,.company-desc,.career-section-title,.timeline small{color:#aaa}
 @media(max-width:600px){
- .selected-work-grid{grid-template-columns:1fr;gap:13px}
+ 
  .selected-work-grid .info{padding:14px}
  .selected-work-grid .title{font-size:14px;min-height:0}
  .selected-work-grid .role{font-size:10px}

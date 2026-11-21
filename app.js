@@ -36,6 +36,14 @@ const featuredProjects=[
 {id:'22GGFnOV1M8',type:'AUTOMOTIVE',purpose:'BMW 정비 작업과 수리 현장을 소개하는 영상',point:'정비 과정과 현장 작업 흐름을 보여주는 콘텐츠'}
 ];
 const selectedGrid=document.querySelector('#selected-work-grid');
+document.querySelectorAll('.featured-arrows button').forEach(button => {
+  button.addEventListener('click', () => {
+    const [first, second] = selectedGrid.children;
+    if (!second) return;
+    const distance = second.getBoundingClientRect().left - first.getBoundingClientRect().left;
+    selectedGrid.scrollBy({left: Number(button.dataset.step) * distance, behavior: 'smooth'});
+  });
+});
 if(selectedGrid){featuredProjects.forEach((project,i)=>{const v=videosById.get(project.id);if(!v)return;const card=document.createElement('article');card.className='card ready selected-card';card.dataset.videoId=v.id;card.dataset.videoTitle=v.title;card.dataset.videoRole=v.role;card.setAttribute('role','button');card.tabIndex=0;card.setAttribute('aria-label',v.title+' 영상 재생');card.innerHTML=`<div class="thumb"><img loading="lazy" src="https://i.ytimg.com/vi/${v.id}/hqdefault.jpg" alt="${escapeHtml(v.title)}"><span class="play">▶</span></div><div class="info"><div class="meta"><span>${escapeHtml(project.type)}</span><span>${String(i+1).padStart(2,'0')}</span></div><div class="title">${escapeHtml(v.title)}</div><div class="role">${escapeHtml(v.role)}</div><div class="featured-explain"><p><strong>콘텐츠 목적</strong><span>${escapeHtml(project.purpose)}</span></p><p><strong>제작 포인트</strong><span>${escapeHtml(project.point)}</span></p></div></div>`;selectedGrid.appendChild(card);const img=card.querySelector('img');if(img)img.addEventListener('error',()=>{const step=img.dataset.fallback||'0';if(step==='0'){img.dataset.fallback='1';img.src='https://i.ytimg.com/vi/'+v.id+'/sddefault.jpg'}else if(step==='1'){img.dataset.fallback='2';img.src='https://img.youtube.com/vi/'+v.id+'/0.jpg'}else{img.remove();const fallback=document.createElement('div');fallback.className='thumb-fallback';fallback.textContent='미리보기를 불러올 수 없습니다';card.querySelector('.thumb').appendChild(fallback)}});const play=()=>openVideo(v.id,v.title,v.role,false);card.addEventListener('click',play);card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();play()}})})}
 // CAREER archive links also read the exact title from the same video record.
 document.querySelectorAll('.career-featured-links a[data-video-id]').forEach(link=>{const v=videosById.get(link.dataset.videoId);if(!v)return;const label=link.querySelector('.career-video-title');if(label)label.textContent=v.title;link.href=v.url;link.setAttribute('aria-label',v.title+' · YouTube에서 보기')});
